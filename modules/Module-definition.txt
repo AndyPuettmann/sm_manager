@@ -1,0 +1,24 @@
+ Simple Server Manager
+ Module File Description
+
+Module naming:
+<module> . <server> . <actionname> . <definitions> .sh
+
+
+### Server ###
+"default"  or match only one servername.
+A direct server-name replaces the default action for that server.
+This way you can add specialized actions (export logs for example) for one server without touching the default action.
+
+
+### Actionname (examples) ###
+"start"		Start the server
+"stop"		Shutdown the server
+"update"	Update server according to update settings
+"restart"	Restart the server (no Update)
+
+### Definitions ###
+"pre-exec"	Before executing the default action
+"exec"		Default action
+"post-exec"	After executing the default action
+"menuentry"	returns the menuentry for the action (if desired)
