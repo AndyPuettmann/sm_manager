@@ -18,7 +18,8 @@ This way you can add specialized actions (export logs for example) for one serve
 "restart"	Restart the server (no Update)
 
 ### Definitions ###
-"pre-exec"	Before executing the default action
+"pre"		Before executing the default action
 "exec"		Default action
-"post-exec"	After executing the default action
-"menuentry"	returns the menuentry for the action (if desired)
+"post"		After executing the default action
+"submenu"	returns the menuentry for the action (if desired)
+"mainmenu"	returns the menuentry for the mainmenu (module-init?)

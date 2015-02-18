@@ -119,44 +119,7 @@ sm_summary() {
         echo "$LINE $(tput sgr 0)"
 }
 
-# Screen stuff - start server
-sm_start() {
-    if [ -n "$1" ]
-        then
 
-            echo "run" > $WANTPATH
-            sm_cstatus
-            case $CSTATUS in
-                shut*|run*) # shutdown or running (still running, no special handler)
-                    if [ -n "$SCREENID" ]
-                        then
-                        if [ -f $INFOPATH ]
-                            then
-                            echo "running" > $INFOPATH
-                        fi
-                        screen -S "$SCREENID" -p 0 -X stuff "/server_message_broadcast info \"Server-Manager\\\nreturning to normal\\\nShutdown cancelled\"`echo -ne '\015'`"
-                        screen -S "$SCREENID" -p 0 -X stuff "/shutdown -1`echo -ne '\015'`"
-                    fi ;;
-
-                *) # Start-Server in Screen
-                    # Prevent double start?
-                    if [ -n "$(eval "screen -list | grep $SCREENID")" ]
-                        then
-                            # Other Screen found
-                            echo "Screenname $SCREENID already in use, skipping start"
-                        else
-                            # No other screen found
-                            echo "Starting Server: $NAME"
-                            echo "Screenname: $SCREENID"
-                            echo "starting" > $INFOPATH
-                            screen -dmSL $SCREENID -s /bin/bash ./sm_manager.sh loop $DNAME
-                    fi
-                    sleep 1 ;;
-
-            esac
-
-    fi
-}
 
 # Screen stuff - stop server
 sm_stop() {
